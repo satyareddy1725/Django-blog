@@ -22,13 +22,13 @@ class Blog(models.Model):
     )
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True, max_length = 100)
+    slug = models.SlugField(unique=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     featured_image = models.ImageField(upload_to='uploads/%Y/%m/%d',null=True, blank=True)
-    short_description = models.TextField(max_length=500)
+    short_description = models.TextField()
     blog_body = models.TextField()
-    status = models.CharField(choices=STATUS_CHOICES, default='draft')
+    status = models.CharField(max_length=20,choices=STATUS_CHOICES, default='draft')
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)   # set once when created
     updated_at = models.DateTimeField(auto_now=True)       # update every save
